@@ -387,6 +387,21 @@
     }
     .hero-cta-final .audio-toggle:hover { color: rgba(255,255,255,0.7); }
     .hero-cta-final .audio-toggle.playing { color: var(--mon-pink); }
+    .hero-cta-final .replay-btn {
+        margin-top: 8px;
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        cursor: pointer;
+        color: rgba(255,255,255,0.25);
+        font-family: var(--font-hand);
+        font-size: 0.95rem;
+        transition: color 0.3s;
+        background: none;
+        border: none;
+        padding: 0;
+    }
+    .hero-cta-final .replay-btn:hover { color: rgba(255,255,255,0.7); }
 
     .hero-timestamp {
         position: absolute; bottom: 10px; right: 18px;
@@ -1111,10 +1126,10 @@
         <div class="overlay-dim"></div>
         <div class="overlay-scanlines"></div>
 
-        <div class="hero-logo" id="heroLogo">
+        <a href="/" class="hero-logo" id="heroLogo" style="text-decoration: none;">
             <h1>BUILD HER<br>BUSINESS</h1>
             <div><span class="tagline">Find Your Gameplan.</span></div>
-        </div>
+        </a>
 
         <!-- PLAY ME — full screen text takeover -->
         <div class="play-me-screen" id="playMeScreen">
@@ -1163,6 +1178,7 @@
                     <span class="lbl-play" style="display: inline;">♫ music</span>
                     <span class="lbl-pause" style="display:none;">♫ playing</span>
                 </div>
+                <button class="replay-btn" id="replayBtn" onclick="event.stopPropagation(); replayExperience();">↺ watch again</button>
             </div>
 
             <div class="scroll-hint" id="scrollHint" onclick="document.getElementById('rememberHer').scrollIntoView({behavior:'smooth'})">
@@ -1526,6 +1542,7 @@
 
     // Scroll-based auto-fade: smooth fade out when scrolling past hero
     var heroSection = document.getElementById('videoHero');
+    window._bhbScrolledAway = false;
     var hasScrolledAway = false;
     var audioFadeInterval = null;
 
@@ -1587,8 +1604,10 @@
         var heroBottom = rect.bottom;
         var threshold = window.innerHeight * 0.35;
 
+        hasScrolledAway = window._bhbScrolledAway;
         if (heroBottom < threshold && !hasScrolledAway) {
             hasScrolledAway = true;
+            window._bhbScrolledAway = true;
             // Cancel any pending experience timers
             experienceTimers.forEach(function(t) { clearTimeout(t); });
             experienceTimers = [];
@@ -1623,6 +1642,128 @@ function toggleAudio() {
         pauseLabel.style.display = 'none';
     }
 }
+
+function replayExperience() {
+    var video = document.getElementById('bgVideo');
+    var audio = document.getElementById('bgAudio');
+    var playMeScreen = document.getElementById('playMeScreen');
+    var copyHero = document.getElementById('copyHero');
+    var ctaFinal = document.getElementById('ctaFinal');
+    var scrollHint = document.getElementById('scrollHint');
+    var timestamp = document.getElementById('timestamp');
+    var stopBtn = document.getElementById('stopBtn');
+    var heroLogo = document.getElementById('heroLogo');
+    var textJourney = document.getElementById('textJourney');
+    var heroBgImg = document.getElementById('heroBgImg');
+    var phrases = document.querySelectorAll('.journey-phrase');
+
+    // Reset scroll state so scroll-fade works again
+    window._bhbScrolledAway = false;
+
+    // Hide end screen elements
+    copyHero.classList.remove('visible');
+    ctaFinal.classList.remove('visible');
+    scrollHint.classList.remove('visible');
+    timestamp.classList.remove('visible');
+    heroLogo.classList.remove('visible');
+
+    // Fade out living room
+    if (heroBgImg) {
+        heroBgImg.style.transition = 'opacity 0.5s ease';
+        heroBgImg.style.opacity = '0';
+    }
+
+    // Reset text journey phrases
+    phrases.forEach(function(p) {
+        p.classList.remove('visible');
+        p.classList.add('fading');
+    });
+    textJourney.style.opacity = '0';
+
+    // Reset video
+    video.currentTime = 0;
+    video.style.transition = 'opacity 0.5s ease';
+    video.style.opacity = '0';
+
+    // Brief pause, then restart the experience
+    setTimeout(function() {
+        // Show text journey
+        textJourney.style.opacity = '1';
+
+        // Play audio
+        audio.currentTime = 0;
+        audio.volume = 0.3;
+        audio.play().then(function() {
+            document.getElementById('audioToggle').classList.add('playing');
+            var playLabel = document.querySelector('#audioToggle .lbl-play');
+            var pauseLabel = document.querySelector('#audioToggle .lbl-pause');
+            if (playLabel) playLabel.style.display = 'none';
+            if (pauseLabel) pauseLabel.style.display = 'inline';
+        }).catch(function() {});
+
+        // Play video
+        video.play().then(function() {
+            video.playbackRate = 0.5;
+            video.style.transition = 'opacity 1.5s ease';
+            video.style.opacity = '1';
+        }).catch(function() {});
+        setTimeout(function() {
+            video.style.transition = 'opacity 1.5s ease';
+            video.style.opacity = '1';
+            try { video.playbackRate = 0.5; } catch(e) {}
+        }, 500);
+
+        // Show stop button
+        stopBtn.classList.add('visible');
+
+        // Replay the text journey with timings
+        phrases.forEach(function(phrase) {
+            var inTime = parseInt(phrase.getAttribute('data-in'));
+            var outTime = parseInt(phrase.getAttribute('data-out'));
+
+            setTimeout(function() {
+                phrase.classList.remove('fading');
+                phrase.classList.add('visible');
+            }, inTime);
+
+            setTimeout(function() {
+                phrase.classList.remove('visible');
+                phrase.classList.add('fading');
+            }, outTime);
+        });
+
+        // End the experience after all phrases
+        var lastPhrase = phrases[phrases.length - 1];
+        var ctaTime = parseInt(lastPhrase.getAttribute('data-out')) + 1000;
+
+        setTimeout(function() {
+            // Settle to still
+            video.pause();
+            video.style.transition = 'opacity 1.5s ease';
+            video.style.opacity = '0';
+            phrases.forEach(function(p) {
+                p.classList.remove('visible');
+                p.classList.add('fading');
+            });
+            if (heroBgImg) {
+                heroBgImg.style.transition = 'opacity 2s ease';
+                heroBgImg.style.opacity = '0.37';
+            }
+            setTimeout(function() {
+                textJourney.style.opacity = '0';
+                copyHero.classList.add('visible');
+            }, 600);
+
+            ctaFinal.classList.add('visible');
+            timestamp.classList.add('visible');
+            scrollHint.classList.add('visible');
+            stopBtn.classList.remove('visible');
+            heroLogo.classList.add('visible');
+        }, ctaTime);
+
+    }, 600);
+}
+
 // Remember Her scroll reveals
 (function() {
     var rhTexts = document.querySelectorAll('.rh-text, .cres-text');
