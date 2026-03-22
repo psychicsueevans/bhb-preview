@@ -299,13 +299,13 @@
         text-shadow: none;
         display: inline-block;
     }
-    /* Subline — underneath */
+    /* Subline — hidden because the CTA detail covers the same info */
     .poster-sub {
         font-family: var(--font-marker);
         font-size: 1rem;
         color: rgba(255,255,255,0.35);
         letter-spacing: 2px;
-        display: block;
+        display: none;
         margin-top: 16px;
     }
 
@@ -1418,13 +1418,19 @@
             }, 100);
         });
 
-        // Play video
+        // Play video — also add visible after a short delay as fallback
+        // in case the promise takes a while to resolve on slow connections
         video.play().then(function() {
             video.playbackRate = 0.5;
             video.classList.add('visible');
         }).catch(function() {
             video.classList.add('visible');
         });
+        // Fallback: ensure video becomes visible even if play() promise is slow
+        experienceTimers.push(setTimeout(function() {
+            video.classList.add('visible');
+            try { video.playbackRate = 0.5; } catch(e) {}
+        }, 500));
 
         // Fade out play me screen
         playMeScreen.classList.add('hidden');
@@ -1441,6 +1447,7 @@
             var outTime = parseInt(phrase.getAttribute('data-out'));
 
             experienceTimers.push(setTimeout(function() {
+                phrase.classList.remove('fading');  // MUST remove fading first — it overrides visible in CSS
                 phrase.classList.add('visible');
             }, inTime));
 
@@ -1455,6 +1462,8 @@
         var ctaTime = parseInt(lastPhrase.getAttribute('data-out')) + 1000;
 
         experienceTimers.push(setTimeout(function() {
+            // Settle video to still and show the movie poster headline
+            settleToStill();
             ctaFinal.classList.add('visible');
             timestamp.classList.add('visible');
             scrollHint.classList.add('visible');
