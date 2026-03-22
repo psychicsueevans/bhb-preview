@@ -11,6 +11,8 @@
         --text-ink: #3C4B71;
         --paper-white: #F8F9FA;
         --hl-yellow: #FFF000;
+        --hl-lilac: #E8B4F8;
+        --hl-lilac-dark: #2a1830;
         --mon-pink: #FFB5C6;
         --mon-laven: #D4C4FB;
         --mon-peach: #FFD2B3;
@@ -102,8 +104,8 @@
     .hero-logo .tagline {
         font-family: var(--font-marker);
         font-size: 0.6rem;
-        color: var(--text-ink);
-        background: var(--hl-yellow);
+        color: var(--hl-lilac-dark);
+        background: var(--hl-lilac);
         padding: 2px 6px;
         display: inline-block;
         transform: rotate(-2deg);
@@ -311,8 +313,8 @@
             6px 6px 0 rgba(0,0,0,0.2);
     }
     .poster-headline .hl-word {
-        background: var(--hl-yellow);
-        color: var(--text-ink);
+        background: var(--hl-lilac);
+        color: var(--hl-lilac-dark);
         padding: 0 14px;
         text-shadow: none;
         display: inline-block;
@@ -350,8 +352,8 @@
     }
     .hero-cta-final .cta-btn {
         display: inline-block;
-        background: var(--hl-yellow);
-        color: var(--text-ink);
+        background: var(--hl-lilac);
+        color: var(--hl-lilac-dark);
         font-family: 'Anton', sans-serif;
         font-size: 1.6rem;
         letter-spacing: 3px;
@@ -360,16 +362,16 @@
         text-decoration: none;
         position: relative;
         transition: transform 0.2s, box-shadow 0.2s;
-        box-shadow: 0 6px 25px rgba(255,240,0,0.3);
+        box-shadow: 0 6px 25px rgba(232,180,248,0.3);
     }
     .hero-cta-final .cta-btn:hover {
         transform: translateY(-3px);
-        box-shadow: 0 10px 35px rgba(255,240,0,0.4);
+        box-shadow: 0 10px 35px rgba(232,180,248,0.4);
     }
     .hero-cta-final .cta-detail {
         font-family: var(--font-hand);
         font-size: 1.4rem;
-        color: rgba(255,255,255,0.4);
+        color: var(--hl-lilac);
         margin-top: 10px;
     }
     .hero-cta-final .audio-toggle {
@@ -414,7 +416,7 @@
         animation: arrow-drop 2s ease infinite;
     }
     .scroll-hint .scroll-arrow:hover {
-        color: var(--hot-pink);
+        color: var(--hl-lilac);
     }
     @keyframes arrow-drop {
         0%, 100% { transform: translateY(0); opacity: 0.6; }
@@ -526,10 +528,10 @@
         line-height: 1.1;
     }
     .remember-her .rh-text .rh-hl {
-        background: var(--hl-yellow);
+        background: var(--hl-lilac);
         padding: 2px 10px;
         display: inline;
-        color: var(--text-ink);
+        color: var(--hl-lilac-dark);
     }
     .remember-her .rh-text.rh-huge {
         font-family: 'Anton', sans-serif;
@@ -829,14 +831,14 @@
     }
     .cta-bridge .bridge-btn {
         display: inline-block;
-        background: var(--hl-yellow);
-        color: var(--text-ink);
+        background: var(--hl-lilac);
+        color: var(--hl-lilac-dark);
         font-family: var(--font-header);
         font-size: 1.3rem;
         padding: 16px 44px;
         text-decoration: none;
         border-radius: 60px;
-        box-shadow: 0 6px 20px rgba(255,240,0,0.3);
+        box-shadow: 0 6px 20px rgba(232,180,248,0.3);
         transition: transform 0.2s, box-shadow 0.2s;
         position: relative;
     }
@@ -932,12 +934,12 @@
     .feature-card h3 { font-family: var(--font-header); font-size: 1.1rem; color: var(--text-ink); margin-bottom: 10px; }
     .feature-card p { font-size: 0.92rem; color: #6B7B9E; line-height: 1.55; }
     .feature-note {
-        grid-column: 1 / -1; background: var(--hl-yellow);
+        grid-column: 1 / -1; background: var(--hl-lilac);
         padding: 24px 28px; text-align: center; transform: rotate(-1deg);
-        box-shadow: 0 8px 24px rgba(255, 240, 0, 0.25);
+        box-shadow: 0 8px 24px rgba(232,180,248,0.25);
         border-radius: 20px;
     }
-    .feature-note p { font-family: var(--font-hand); font-size: 1.4rem; color: var(--text-ink); line-height: 1.4; }
+    .feature-note p { font-family: var(--font-hand); font-size: 1.4rem; color: var(--hl-lilac-dark); line-height: 1.4; }
 
     /* ===== PHOTO DIVIDER 2 — Second large photo banner ===== */
     .photo-divider-2 {
@@ -1020,7 +1022,7 @@
     }
     .crescendo .cres-text.cres-feature .cres-num {
         font-size: 1.2rem;
-        color: var(--hl-yellow);
+        color: var(--hl-lilac);
         letter-spacing: 6px;
         display: block;
         margin-bottom: 8px;
@@ -1029,7 +1031,7 @@
     .crescendo .cres-text.cres-big {
         font-family: 'Anton', sans-serif;
         font-size: 6rem;
-        color: var(--hl-yellow);
+        color: var(--hl-lilac);
         text-transform: uppercase;
         letter-spacing: 5px;
         line-height: 1;
@@ -1043,8 +1045,8 @@
     }
     .crescendo .cres-cta a {
         display: inline-block;
-        background: var(--hl-yellow);
-        color: var(--text-ink);
+        background: var(--hl-lilac);
+        color: var(--hl-lilac-dark);
         font-family: 'Anton', sans-serif;
         font-size: 1.6rem;
         letter-spacing: 3px;
@@ -1156,7 +1158,7 @@
             <!-- CTA — appears at the end of the journey -->
             <div class="hero-cta-final" id="ctaFinal">
                 <a href="#" class="cta-btn">Find Your Gameplan</a>
-                <div class="cta-detail">£15/month. cancel anytime. no bullshit.</div>
+                <div class="cta-detail">£15/month. cancel anytime. no catch.</div>
                 <div class="audio-toggle" id="audioToggle" onclick="event.stopPropagation(); toggleAudio();">
                     <span class="lbl-play" style="display: inline;">♫ music</span>
                     <span class="lbl-pause" style="display:none;">♫ playing</span>
@@ -1327,7 +1329,7 @@
             <div class="bridge-hand">you've waited long enough.</div>
             <div class="bridge-bold">This is your sign to start.</div>
             <a href="#" class="bridge-btn">Find Your Gameplan</a>
-            <div class="bridge-sub">£15/month. cancel anytime. no bullshit.</div>
+            <div class="bridge-sub">£15/month. cancel anytime. no catch.</div>
         </div>
     </section>
 
@@ -1362,7 +1364,7 @@
         <div class="cres-line">
             <div class="cres-text cres-feature tb-visible">
                 <span class="cres-num">-- 05 --</span>
-                no bullshit
+                no catch
             </div>
         </div>
         <div class="cres-line">
