@@ -1556,9 +1556,10 @@
     var textJourney = document.getElementById('textJourney');
 
     function settleToStill() {
-        // Pause video but keep it VISIBLE at frame 0 — shows as a still image
+        // Fade out video so it doesn't double up with the living room
         video.pause();
-        video.currentTime = 0;
+        video.style.transition = 'opacity 1.5s ease';
+        video.style.opacity = '0';
 
         // Hide the cycling phrases
         phrases.forEach(function(p) {
