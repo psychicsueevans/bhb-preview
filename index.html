@@ -1566,6 +1566,13 @@
             p.classList.add('fading');
         });
 
+        // Bring the living room back — soft fade in behind the poster
+        var heroBgImg = document.getElementById('heroBgImg');
+        if (heroBgImg) {
+            heroBgImg.style.transition = 'opacity 2s ease';
+            heroBgImg.style.opacity = '0.37';
+        }
+
         // After phrases fade, hide the journey container and show static copy
         setTimeout(function() {
             textJourney.style.opacity = '0';
