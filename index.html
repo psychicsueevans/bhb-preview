@@ -1381,11 +1381,15 @@
     video.playbackRate = 0.5;
 
     // Pre-unlock audio on first touch so mobile browsers allow playback
+    // IMPORTANT: check hasStarted to avoid race condition with startExperience
     function unlockAudio() {
+        if (hasStarted) return; // Don't interfere if experience already triggered
         audio.volume = 0;
         audio.play().then(function() {
-            audio.pause();
-            audio.currentTime = 0;
+            if (!hasStarted) {
+                audio.pause();
+                audio.currentTime = 0;
+            }
         }).catch(function() {});
         document.removeEventListener('touchstart', unlockAudio);
         document.removeEventListener('click', unlockAudio);
@@ -1396,6 +1400,9 @@
     function startExperience() {
         if (hasStarted) return;
         hasStarted = true;
+
+        // Show text journey container (starts hidden, made visible for experience)
+        document.getElementById('textJourney').style.opacity = '1';
 
         // Play audio FIRST — the user tap counts as the gesture
         audio.volume = 0.3;
