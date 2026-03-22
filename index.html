@@ -37,6 +37,23 @@
         justify-content: center;
         background: #0a0a0f;
     }
+    .hero-bg-img {
+        position: absolute;
+        top: 0; left: 0; right: 0; bottom: 0;
+        background-image: url('BHB-LivingRoom-Hero.jpg');
+        background-size: cover;
+        background-position: center;
+        opacity: 0.37;
+        filter: saturate(0.87) brightness(0.85);
+        z-index: 0;
+    }
+    .hero-bg-vignette {
+        position: absolute;
+        top: 0; left: 0; right: 0; bottom: 0;
+        background: radial-gradient(ellipse at center, rgba(0,0,0,0.15) 0%, rgba(0,0,0,0.13) 100%);
+        z-index: 0;
+        pointer-events: none;
+    }
     .video-hero video {
         position: absolute;
         top: 0; left: 0;
@@ -1082,6 +1099,8 @@
 
     <!-- ===== VIDEO HERO — PRESERVED EXACTLY ===== -->
     <div class="video-hero" id="videoHero">
+        <div class="hero-bg-img" id="heroBgImg"></div>
+        <div class="hero-bg-vignette"></div>
         <video id="bgVideo" src="video1.mp4" muted="" loop="" playsinline="" preload="auto" webkit-playsinline="true"></video>
         <div class="overlay-dim"></div>
         <div class="overlay-scanlines"></div>
@@ -1420,7 +1439,12 @@
             try { video.playbackRate = 0.5; } catch(e) {}
         }, 500));
 
-        // Fade out play me screen
+        // Fade out living room background and play me screen
+        var heroBgImg = document.getElementById('heroBgImg');
+        if (heroBgImg) {
+            heroBgImg.style.transition = 'opacity 1.5s ease';
+            heroBgImg.style.opacity = '0';
+        }
         playMeScreen.classList.add('hidden');
 
         // Show stop button
