@@ -510,19 +510,38 @@
         text-shadow: 3px 3px 0 var(--hot-pink);
         line-height: 1;
     }
-    /* Sticker images — scattered retro objects */
-    .remember-her .rh-sticker {
+    /* Polaroid photos scattered in margins */
+    .rh-photo {
         position: absolute;
         z-index: 1;
-        width: 90px; height: auto;
-        opacity: 0.2;
         pointer-events: none;
     }
-    .rh-s1 { top: 4%; right: 6%; transform: rotate(15deg); }
-    .rh-s2 { top: 20%; left: 3%; transform: rotate(-10deg); }
-    .rh-s3 { top: 42%; right: 4%; transform: rotate(20deg); }
-    .rh-s4 { top: 62%; left: 5%; transform: rotate(-8deg); }
-    .rh-s5 { top: 82%; right: 8%; transform: rotate(12deg); }
+    .rh-polaroid-scatter {
+        background: white;
+        padding: 6px 6px 28px 6px;
+        box-shadow: 2px 3px 15px rgba(0,0,0,0.12), 0 0 0 1px rgba(0,0,0,0.04);
+        display: inline-block;
+        width: 150px;
+    }
+    .rh-polaroid-scatter img {
+        width: 100%;
+        display: block;
+        aspect-ratio: 1;
+        object-fit: cover;
+        filter: saturate(0.85) contrast(1.05) sepia(0.08);
+    }
+    .rh-polaroid-scatter .pol-label {
+        font-family: var(--font-hand);
+        font-size: 0.9rem;
+        color: var(--text-ink);
+        display: block;
+        text-align: center;
+        margin-top: 4px;
+        opacity: 0.7;
+    }
+    .rh-p1 { top: 5%; right: 3%; transform: rotate(6deg); }
+    .rh-p2 { top: 38%; left: 2%; transform: rotate(-4deg); }
+    .rh-p3 { top: 70%; right: 5%; transform: rotate(8deg); }
     /* Polaroid photo */
     .rh-polaroid {
         background: white;
@@ -555,9 +574,9 @@
     /* ===== VHS VIDEO STRIP ===== */
     .vhs-strip {
         position: relative;
-        height: 200px;
+        height: 220px;
         overflow: hidden;
-        background: #0a0a0f;
+        background: #1a0a1f;
     }
     .vhs-strip video {
         position: absolute;
@@ -565,7 +584,17 @@
         transform: translate(-50%, -50%);
         min-width: 100%; min-height: 100%;
         object-fit: cover;
-        opacity: 0.5;
+        opacity: 0.75;
+        filter: saturate(0.6) contrast(1.2) sepia(0.15);
+    }
+    /* Warm pink/magenta tint overlay */
+    .vhs-strip::before {
+        content: '';
+        position: absolute;
+        top: 0; left: 0; right: 0; bottom: 0;
+        background: linear-gradient(135deg, rgba(229,58,138,0.15) 0%, rgba(180,159,204,0.12) 100%);
+        z-index: 1;
+        pointer-events: none;
     }
     .vhs-strip::after {
         content: '';
@@ -573,28 +602,43 @@
         top: 0; left: 0; right: 0; bottom: 0;
         background: repeating-linear-gradient(
             transparent, transparent 2px,
-            rgba(0,0,0,0.3) 2px, rgba(0,0,0,0.3) 4px
+            rgba(0,0,0,0.15) 2px, rgba(0,0,0,0.15) 4px
         );
         pointer-events: none;
         z-index: 2;
     }
     .vhs-strip .vhs-label {
         position: absolute;
-        bottom: 12px; left: 16px;
+        bottom: 14px; left: 18px;
         font-family: 'Courier New', monospace;
-        font-size: 0.7rem;
-        color: rgba(255,255,255,0.3);
-        letter-spacing: 2px;
+        font-size: 0.85rem;
+        color: rgba(255,255,255,0.55);
+        letter-spacing: 3px;
         z-index: 3;
+        text-shadow: 0 0 8px rgba(229,58,138,0.4);
     }
     .vhs-strip .vhs-timecode {
         position: absolute;
-        top: 12px; right: 16px;
+        top: 14px; right: 18px;
         font-family: 'Courier New', monospace;
-        font-size: 0.7rem;
-        color: rgba(255,255,255,0.3);
-        letter-spacing: 2px;
+        font-size: 0.85rem;
+        color: rgba(255,255,255,0.55);
+        letter-spacing: 3px;
         z-index: 3;
+        text-shadow: 0 0 8px rgba(229,58,138,0.4);
+    }
+    /* VHS tracking line effect */
+    .vhs-strip .vhs-tracking {
+        position: absolute;
+        left: 0; right: 0;
+        height: 3px;
+        background: rgba(255,255,255,0.08);
+        z-index: 3;
+        animation: vhs-track 4s linear infinite;
+    }
+    @keyframes vhs-track {
+        0% { top: -3px; }
+        100% { top: 100%; }
     }
 
     /* ===== CRESCENDO FINALE ===== */
@@ -876,9 +920,9 @@
         .remember-her .rh-text.rh-marker { font-size: 2rem; }
         .remember-her .rh-text.rh-bold { font-size: 2.8rem; }
         .remember-her .rh-text.rh-huge { font-size: 3.8rem; }
-        .remember-her .rh-sticker { width: 60px; }
+        .rh-photo { display: none; }
         .rh-polaroid { max-width: 180px; }
-        .vhs-strip { height: 140px; }
+        .vhs-strip { height: 160px; }
         .crescendo .cres-text.cres-feature { font-size: 2.6rem; }
         .crescendo .cres-text.cres-big { font-size: 4.5rem; }
         .crescendo .cres-line { min-height: 40vh; }
@@ -905,9 +949,8 @@
         .remember-her .rh-text.rh-marker { font-size: 1.7rem; }
         .remember-her .rh-text.rh-bold { font-size: 2.2rem; }
         .remember-her .rh-text.rh-huge { font-size: 3rem; letter-spacing: 2px; }
-        .remember-her .rh-sticker { width: 45px; opacity: 0.15; }
         .rh-polaroid { max-width: 150px; }
-        .vhs-strip { height: 100px; }
+        .vhs-strip { height: 120px; }
         .crescendo .cres-text.cres-feature { font-size: 2rem; letter-spacing: 2px; }
         .crescendo .cres-text.cres-big { font-size: 3.5rem; letter-spacing: 3px; }
         .crescendo .cres-cta a { font-size: 1.3rem; padding: 16px 36px; }
@@ -1031,12 +1074,25 @@
 
     <!-- ===== REMEMBER HER — 90s diary scroll ===== -->
     <section class="remember-her" id="rememberHer">
-        <!-- 90s sticker images -->
-        <img class="rh-sticker rh-s1" src="scrunchie.png" alt="">
-        <img class="rh-sticker rh-s2" src="tape.png" alt="">
-        <img class="rh-sticker rh-s3" src="floppy.png" alt="">
-        <img class="rh-sticker rh-s4" src="filofax.png" alt="">
-        <img class="rh-sticker rh-s5" src="scrunchie.png" alt="">
+        <!-- 90s polaroid photos scattered -->
+        <div class="rh-photo rh-p1">
+            <div class="rh-polaroid-scatter">
+                <img src="BHB-LivingRoom-Hero.jpg" alt="">
+                <span class="pol-label">summer '96</span>
+            </div>
+        </div>
+        <div class="rh-photo rh-p2">
+            <div class="rh-polaroid-scatter">
+                <img src="BHB-TheCrew-GirlsLaughing.jpg" alt="">
+                <span class="pol-label">the girls x</span>
+            </div>
+        </div>
+        <div class="rh-photo rh-p3">
+            <div class="rh-polaroid-scatter">
+                <img src="BHB-Roadmap-GoldenHour.jpg" alt="">
+                <span class="pol-label">road trip</span>
+            </div>
+        </div>
 
         <div class="rh-line">
             <div class="rh-text rh-hand tb-visible">you had plans once.<br>big ones.</div>
@@ -1069,6 +1125,7 @@
     <!-- ===== VHS VIDEO STRIP ===== -->
     <div class="vhs-strip">
         <video src="video1.mp4" muted="" loop="" playsinline="" autoplay=""></video>
+        <div class="vhs-tracking"></div>
         <span class="vhs-label">PLAY ▶ SP</span>
         <span class="vhs-timecode">00:03:27</span>
     </div>
@@ -1121,6 +1178,7 @@
     <!-- ===== VHS STRIP 2 — before the crescendo ===== -->
     <div class="vhs-strip">
         <video src="video1.mp4" muted="" loop="" playsinline="" autoplay=""></video>
+        <div class="vhs-tracking" style="animation-delay: -2s;"></div>
         <span class="vhs-label">REC ●</span>
         <span class="vhs-timecode">01:33:07</span>
     </div>
