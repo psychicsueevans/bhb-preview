@@ -1575,8 +1575,17 @@
 
         if (heroBottom < threshold && !hasScrolledAway) {
             hasScrolledAway = true;
+            // Cancel any pending experience timers
+            experienceTimers.forEach(function(t) { clearTimeout(t); });
+            experienceTimers = [];
             fadeOutAudio();
             settleToStill();
+            // Immediately show CTA, arrow and hide stop button
+            ctaFinal.classList.add('visible');
+            timestamp.classList.add('visible');
+            scrollHint.classList.add('visible');
+            stopBtn.classList.remove('visible');
+            heroLogo.classList.add('visible');
         }
     }, { passive: true });
 })();
