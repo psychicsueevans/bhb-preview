@@ -273,9 +273,9 @@
         top: 0; left: 0; right: 0; bottom: 0;
         z-index: 11;
         display: flex;
-        align-items: flex-start;
+        flex-direction: column;
+        align-items: center;
         justify-content: center;
-        padding-top: 12vh;
         pointer-events: none;
         opacity: 0;
         transition: opacity 1.2s ease;
@@ -329,11 +329,11 @@
 
     /* ===== CTA REVEAL ===== */
     .hero-cta-final {
-        position: absolute;
-        bottom: 80px; left: 0; right: 0;
+        position: relative;
         z-index: 12;
         text-align: center;
         padding: 0 24px;
+        margin-top: 36px;
         opacity: 0;
         transform: translateY(20px);
         transition: opacity 1.2s ease, transform 1.2s ease;
@@ -342,6 +342,10 @@
     .hero-cta-final.visible {
         opacity: 1;
         transform: translateY(0);
+        pointer-events: auto !important;
+    }
+    .copy-hero.visible .hero-cta-final,
+    .copy-hero.visible .scroll-hint {
         pointer-events: auto;
     }
     .hero-cta-final .cta-btn {
@@ -392,8 +396,8 @@
 
     /* Scroll hint — subtle bouncing arrow, clickable to scroll down */
     .scroll-hint {
-        position: absolute;
-        bottom: 16px; left: 0; right: 0;
+        position: relative;
+        margin-top: 20px;
         z-index: 15;
         text-align: center;
         opacity: 0; transition: opacity 1s ease;
@@ -1148,20 +1152,20 @@
                 <span class="poster-headline">YOU WERE<br>NEVER THE<br><span class="hl-word">FAILURE.</span></span>
                 <span class="poster-sub">real gameplans. real numbers. £15/month.</span>
             </div>
-        </div>
 
-        <!-- CTA — appears at the end of the journey -->
-        <div class="hero-cta-final" id="ctaFinal">
-            <a href="#" class="cta-btn">Find Your Gameplan</a>
-            <div class="cta-detail">£15/month. cancel anytime. no bullshit.</div>
-            <div class="audio-toggle" id="audioToggle" onclick="event.stopPropagation(); toggleAudio();">
-                <span class="lbl-play" style="display: inline;">♫ music</span>
-                <span class="lbl-pause" style="display:none;">♫ playing</span>
+            <!-- CTA — appears at the end of the journey -->
+            <div class="hero-cta-final" id="ctaFinal">
+                <a href="#" class="cta-btn">Find Your Gameplan</a>
+                <div class="cta-detail">£15/month. cancel anytime. no bullshit.</div>
+                <div class="audio-toggle" id="audioToggle" onclick="event.stopPropagation(); toggleAudio();">
+                    <span class="lbl-play" style="display: inline;">♫ music</span>
+                    <span class="lbl-pause" style="display:none;">♫ playing</span>
+                </div>
             </div>
-        </div>
 
-        <div class="scroll-hint" id="scrollHint" onclick="document.getElementById('rememberHer').scrollIntoView({behavior:'smooth'})">
-            <span class="scroll-arrow">▼</span>
+            <div class="scroll-hint" id="scrollHint" onclick="document.getElementById('rememberHer').scrollIntoView({behavior:'smooth'})">
+                <span class="scroll-arrow">▼</span>
+            </div>
         </div>
 
         <audio id="bgAudio" preload="auto" loop="">
