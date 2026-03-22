@@ -256,8 +256,9 @@
         top: 0; left: 0; right: 0; bottom: 0;
         z-index: 11;
         display: flex;
-        align-items: center;
+        align-items: flex-start;
         justify-content: center;
+        padding-top: 12vh;
         pointer-events: none;
         opacity: 0;
         transition: opacity 1.2s ease;
@@ -312,7 +313,7 @@
     /* ===== CTA REVEAL ===== */
     .hero-cta-final {
         position: absolute;
-        bottom: 120px; left: 0; right: 0;
+        bottom: 80px; left: 0; right: 0;
         z-index: 12;
         text-align: center;
         padding: 0 24px;
@@ -372,10 +373,10 @@
     }
     .hero-timestamp.visible { opacity: 1; }
 
-    /* Scroll hint — cinematic, matches PRESS PLAY energy */
+    /* Scroll hint — subtle bouncing arrow, clickable to scroll down */
     .scroll-hint {
         position: absolute;
-        bottom: 18px; left: 0; right: 0;
+        bottom: 16px; left: 0; right: 0;
         z-index: 15;
         text-align: center;
         opacity: 0; transition: opacity 1s ease;
@@ -383,32 +384,20 @@
     }
     .scroll-hint.visible { opacity: 1; }
     .scroll-hint .scroll-text {
-        font-family: 'Anton', sans-serif;
-        font-size: 2.6rem;
-        letter-spacing: 6px;
-        text-transform: uppercase;
-        color: white;
-        display: block;
-        line-height: 1;
-        text-shadow: 2px 2px 0 rgba(0,0,0,0.5), 0 0 40px rgba(255,255,255,0.1);
-        animation: scroll-breathe 2.5s ease infinite;
+        display: none;
     }
     .scroll-hint .scroll-arrow {
         display: block;
-        font-family: 'Anton', sans-serif;
-        font-size: 1.8rem;
-        color: var(--hot-pink);
-        margin-top: 6px;
-        animation: arrow-drop 1.5s ease infinite;
-        text-shadow: 0 0 20px rgba(229,58,138,0.5);
+        font-size: 1.4rem;
+        color: rgba(255,255,255,0.35);
+        animation: arrow-drop 2s ease infinite;
     }
-    @keyframes scroll-breathe {
-        0%, 100% { opacity: 1; }
-        50% { opacity: 0.7; }
+    .scroll-hint .scroll-arrow:hover {
+        color: var(--hot-pink);
     }
     @keyframes arrow-drop {
-        0%, 100% { transform: translateY(0); opacity: 1; }
-        50% { transform: translateY(10px); opacity: 0.5; }
+        0%, 100% { transform: translateY(0); opacity: 0.6; }
+        50% { transform: translateY(8px); opacity: 1; }
     }
 
     /* ===== REMEMBER HER — WARM SCRAPBOOK REDESIGN ===== */
@@ -1152,8 +1141,7 @@
             </div>
         </div>
 
-        <div class="scroll-hint" id="scrollHint">
-            <span class="scroll-text">KEEP<br>GOING</span>
+        <div class="scroll-hint" id="scrollHint" onclick="document.getElementById('rememberHer').scrollIntoView({behavior:'smooth'})">
             <span class="scroll-arrow">▼</span>
         </div>
 
