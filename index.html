@@ -419,15 +419,61 @@
         padding: 60px 30px 80px;
         min-height: 100vh;
     }
+    /* Scattered sparkle/star decorations like the PDF */
+    .remember-her::before {
+        content: '\2726  \2727  \2726  \2727  \2726  \2727  \2726';
+        position: absolute;
+        top: 30px; right: 40px;
+        font-size: 1.8rem;
+        color: rgba(229,58,138,0.12);
+        letter-spacing: 20px;
+        z-index: 0;
+        pointer-events: none;
+        transform: rotate(15deg);
+    }
+    .remember-her::after {
+        content: '\2726  \2727  \2726  \2727  \2726';
+        position: absolute;
+        bottom: 60px; left: 30px;
+        font-size: 1.4rem;
+        color: rgba(180,159,204,0.15);
+        letter-spacing: 18px;
+        z-index: 0;
+        pointer-events: none;
+        transform: rotate(-10deg);
+    }
     .remember-her .rh-line {
         min-height: auto;
         display: flex;
         align-items: center;
         justify-content: center;
         flex-direction: column;
-        padding: 40px 30px;
+        padding: 30px 30px;
         position: relative;
-        gap: 30px;
+        gap: 20px;
+    }
+    /* Decorative sparkles on individual text lines */
+    .remember-her .rh-line:nth-child(5)::after {
+        content: '\2726';
+        position: absolute;
+        right: 15%;
+        top: 20px;
+        font-size: 2rem;
+        color: rgba(229,58,138,0.18);
+        animation: sparkle-fade 3s ease infinite;
+    }
+    .remember-her .rh-line:nth-child(8)::before {
+        content: '\2727  \2726';
+        position: absolute;
+        left: 10%;
+        bottom: 10px;
+        font-size: 1.5rem;
+        color: rgba(180,159,204,0.2);
+        letter-spacing: 12px;
+    }
+    @keyframes sparkle-fade {
+        0%, 100% { opacity: 1; transform: scale(1); }
+        50% { opacity: 0.4; transform: scale(0.8); }
     }
     .remember-her .rh-text {
         text-align: center;
@@ -484,48 +530,93 @@
         text-shadow: 3px 3px 0 var(--mon-pink);
         line-height: 1;
     }
-    /* Scrapbook photos - much larger with white borders */
+    /* Scrapbook photos - absolutely positioned, scattered across the page */
     .rh-photo {
-        position: relative;
-        z-index: 2;
+        position: absolute;
+        z-index: 1;
         pointer-events: none;
-        margin: 40px 0;
     }
     .rh-polaroid-scatter {
         background: white;
-        padding: 12px;
-        box-shadow: 0 10px 35px rgba(0,0,0,0.12), 0 0 0 1px rgba(0,0,0,0.05);
+        padding: 10px 10px 32px 10px;
+        box-shadow: 0 8px 30px rgba(0,0,0,0.1), 0 2px 8px rgba(0,0,0,0.06);
         display: inline-block;
-        width: 280px;
-        border-radius: 8px;
+        width: 220px;
     }
     .rh-polaroid-scatter img {
         width: 100%;
         display: block;
         aspect-ratio: 1;
         object-fit: cover;
-        filter: saturate(1) contrast(1.05) sepia(0.05);
-        border-radius: 4px;
+        filter: saturate(1.05) contrast(1.05);
     }
     .rh-polaroid-scatter .pol-label {
         font-family: var(--font-hand);
-        font-size: 1.2rem;
+        font-size: 1.1rem;
         color: var(--text-ink);
         display: block;
         text-align: center;
-        margin-top: 8px;
-        opacity: 0.85;
+        margin-top: 6px;
+        opacity: 0.75;
     }
-    .rh-p1 { margin: 40px auto; transform: rotate(-3deg); }
-    .rh-p2 { margin: 40px auto; transform: rotate(2deg); }
-    .rh-p3 { margin: 40px auto; transform: rotate(-2deg); }
-    /* Sparkle decorations */
-    .remember-her::before {
-        content: '';
-        position: fixed;
+    .rh-p1 { top: 2%; right: 5%; transform: rotate(5deg); }
+    .rh-p2 { top: 35%; left: 3%; transform: rotate(-4deg); }
+    .rh-p3 { top: 68%; right: 4%; transform: rotate(3deg); }
+    .remember-her .rh-tear { display: none; }
+
+    /* Decorative scattered dots — like the PDF doodles */
+    .deco-dots {
+        position: absolute;
+        z-index: 0;
         pointer-events: none;
     }
-    .remember-her .rh-tear { display: none; }
+    .deco-dots::before {
+        content: '';
+        display: block;
+        width: 8px; height: 8px;
+        border-radius: 50%;
+        background: var(--mon-pink);
+        box-shadow:
+            22px 14px 0 var(--mon-laven),
+            48px -8px 0 var(--mon-peach),
+            -12px 30px 0 var(--mon-yellow),
+            60px 28px 0 var(--mon-mint),
+            35px 42px 0 var(--mon-pink),
+            8px 55px 0 var(--mon-laven),
+            72px 10px 0 var(--mon-yellow);
+        opacity: 0.4;
+    }
+    .deco-dots-sm::before {
+        width: 5px; height: 5px;
+        box-shadow:
+            15px 10px 0 var(--mon-laven),
+            32px -5px 0 var(--mon-peach),
+            -8px 20px 0 var(--mon-yellow),
+            45px 18px 0 var(--mon-mint);
+        opacity: 0.35;
+    }
+
+    /* Washi tape decoration for cards */
+    .washi-tape {
+        position: absolute;
+        top: -8px; left: 50%;
+        transform: translateX(-50%) rotate(-3deg);
+        width: 80px; height: 18px;
+        background: var(--mon-yellow);
+        opacity: 0.6;
+        z-index: 3;
+    }
+    .washi-tape.tape-pink { background: var(--mon-pink); transform: translateX(-50%) rotate(2deg); }
+    .washi-tape.tape-laven { background: var(--mon-laven); transform: translateX(-50%) rotate(-1deg); }
+    .washi-tape.tape-mint { background: var(--mon-mint); transform: translateX(-50%) rotate(4deg); }
+
+    /* Curvy dotted path line like the PDF road trip theme */
+    .dotted-path {
+        position: absolute;
+        z-index: 0;
+        pointer-events: none;
+    }
+    .dotted-path svg { overflow: visible; }
 
     /* ===== PHOTO DIVIDER 1 — Large photo banner ===== */
     .photo-divider-1 {
@@ -559,6 +650,28 @@
         position: relative;
         overflow: hidden;
     }
+    /* Decorative sparkle elements */
+    .sound-familiar::before {
+        content: '\2726  \2727  \2726';
+        position: absolute;
+        top: 40px; right: 60px;
+        font-size: 1.6rem;
+        color: rgba(229,58,138,0.12);
+        letter-spacing: 16px;
+        z-index: 0;
+        pointer-events: none;
+    }
+    .sound-familiar::after {
+        content: '\2726  \2727';
+        position: absolute;
+        bottom: 50px; left: 50px;
+        font-size: 1.3rem;
+        color: rgba(180,159,204,0.15);
+        letter-spacing: 14px;
+        z-index: 0;
+        pointer-events: none;
+        transform: rotate(20deg);
+    }
     .sound-familiar .inner { max-width: 720px; margin: 0 auto; position: relative; z-index: 2; }
     .sound-familiar .section-tag {
         font-family: var(--font-hand); font-size: 1.8rem; color: var(--hot-pink);
@@ -569,22 +682,38 @@
         font-family: var(--font-header); font-size: 2.5rem; color: var(--text-ink);
         margin-bottom: 40px; line-height: 1.2; text-shadow: 2px 2px 0 rgba(229,58,138,0.08);
     }
-    /* Sticker-style diary cards with rounded corners and soft pastel backgrounds */
+    /* Sticker-style diary cards — organic, overlapping feel */
     .diary-note {
-        background: rgba(212, 196, 251, 0.3);
-        padding: 28px 28px;
-        margin-bottom: 20px;
+        background: rgba(212, 196, 251, 0.35);
+        padding: 30px 30px 30px 36px;
+        margin-bottom: 24px;
         position: relative;
         transform: rotate(-1.5deg);
-        box-shadow: 0 6px 20px rgba(180,159,204,0.18);
-        border-radius: 18px;
+        box-shadow: 0 8px 28px rgba(180,159,204,0.2);
+        border-radius: 20px;
         border: none;
+        margin-left: 10px;
+        margin-right: 10px;
     }
-    .diary-note:nth-child(2) { background: rgba(255, 210, 179, 0.25); transform: rotate(1deg); }
-    .diary-note:nth-child(3) { background: rgba(255, 181, 198, 0.3); transform: rotate(-0.8deg); }
-    .diary-note:nth-child(4) { background: rgba(254, 236, 148, 0.25); transform: rotate(1.2deg); }
-    .diary-note:nth-child(5) { background: rgba(178, 229, 208, 0.25); transform: rotate(-1deg); }
-    .diary-note::before { display: none; }
+    .diary-note:nth-child(2) { background: rgba(255, 210, 179, 0.3); transform: rotate(1.2deg); margin-left: -5px; }
+    .diary-note:nth-child(3) { background: rgba(255, 181, 198, 0.35); transform: rotate(-0.8deg); margin-left: 20px; }
+    .diary-note:nth-child(4) { background: rgba(254, 236, 148, 0.3); transform: rotate(1.5deg); margin-left: -10px; }
+    .diary-note:nth-child(5) { background: rgba(178, 229, 208, 0.3); transform: rotate(-1deg); margin-left: 15px; }
+    /* Coloured tab sticker on top-left */
+    .diary-note::before {
+        content: '';
+        position: absolute;
+        top: -6px; left: 24px;
+        width: 40px; height: 40px;
+        background: var(--mon-laven);
+        border-radius: 50%;
+        opacity: 0.5;
+        transform: rotate(10deg);
+    }
+    .diary-note:nth-child(2)::before { background: var(--mon-peach); }
+    .diary-note:nth-child(3)::before { background: var(--mon-pink); }
+    .diary-note:nth-child(4)::before { background: var(--mon-yellow); }
+    .diary-note:nth-child(5)::before { background: var(--mon-mint); }
     .diary-note .dn-thought {
         font-family: var(--font-hand);
         font-size: 1.9rem;
@@ -607,6 +736,132 @@
         margin-top: 30px;
         transform: rotate(-2deg); display: inline-block;
     }
+    /* Inline scrapbook photo in sound familiar */
+    .sf-photo-break {
+        margin: 30px -10px 30px;
+        position: relative;
+        text-align: center;
+    }
+    .sf-photo-break .sf-polaroid {
+        display: inline-block;
+        background: white;
+        padding: 10px 10px 34px 10px;
+        box-shadow: 0 10px 35px rgba(0,0,0,0.12);
+        transform: rotate(2deg);
+        max-width: 280px;
+        position: relative;
+    }
+    .sf-photo-break .sf-polaroid img {
+        width: 100%;
+        display: block;
+        aspect-ratio: 4/3;
+        object-fit: cover;
+        filter: saturate(1.05);
+    }
+    .sf-photo-break .sf-polaroid .pol-label {
+        font-family: var(--font-hand);
+        font-size: 1.1rem;
+        color: var(--text-ink);
+        text-align: center;
+        display: block;
+        margin-top: 6px;
+        opacity: 0.7;
+    }
+    .sf-photo-break .sf-arrow {
+        position: absolute;
+        bottom: -20px; right: -10px;
+        font-family: var(--font-hand);
+        font-size: 2rem;
+        color: var(--hot-pink);
+        transform: rotate(15deg);
+        opacity: 0.6;
+    }
+
+    /* ===== WARM CTA BRIDGE — between What's Inside and Crescendo ===== */
+    .cta-bridge {
+        background: linear-gradient(180deg, #FFD4B8 0%, #FFE8ED 50%, #FFF5F0 100%);
+        padding: 80px 24px;
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+    }
+    .cta-bridge::before {
+        content: '\2726  \2727  \2726  \2727  \2726  \2727  \2726  \2727  \2726';
+        position: absolute;
+        top: 20px; left: 50%;
+        transform: translateX(-50%);
+        font-size: 1.6rem;
+        color: rgba(229,58,138,0.1);
+        letter-spacing: 24px;
+        pointer-events: none;
+        white-space: nowrap;
+    }
+    .cta-bridge .bridge-inner {
+        max-width: 600px;
+        margin: 0 auto;
+        position: relative;
+        z-index: 2;
+    }
+    .cta-bridge .bridge-hand {
+        font-family: var(--font-hand);
+        font-size: 2.4rem;
+        color: var(--text-ink);
+        line-height: 1.4;
+        margin-bottom: 16px;
+    }
+    .cta-bridge .bridge-bold {
+        font-family: var(--font-header);
+        font-size: 2.8rem;
+        color: var(--hot-pink);
+        line-height: 1.1;
+        margin-bottom: 30px;
+        text-shadow: 2px 2px 0 rgba(229,58,138,0.1);
+    }
+    .cta-bridge .bridge-btn {
+        display: inline-block;
+        background: var(--hl-yellow);
+        color: var(--text-ink);
+        font-family: var(--font-header);
+        font-size: 1.3rem;
+        padding: 16px 44px;
+        text-decoration: none;
+        border-radius: 60px;
+        box-shadow: 0 6px 20px rgba(255,240,0,0.3);
+        transition: transform 0.2s, box-shadow 0.2s;
+        position: relative;
+    }
+    .cta-bridge .bridge-btn:hover {
+        transform: translateY(-3px) rotate(-1deg);
+        box-shadow: 0 10px 30px rgba(255,240,0,0.4);
+    }
+    .cta-bridge .bridge-sub {
+        font-family: var(--font-hand);
+        font-size: 1.3rem;
+        color: var(--text-ink);
+        opacity: 0.5;
+        margin-top: 14px;
+    }
+    /* Scattered photo accents in CTA bridge */
+    .bridge-photo {
+        position: absolute;
+        z-index: 1;
+        pointer-events: none;
+    }
+    .bridge-photo .bridge-pol {
+        background: white;
+        padding: 6px 6px 22px 6px;
+        box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+        display: inline-block;
+        width: 140px;
+    }
+    .bridge-photo .bridge-pol img {
+        width: 100%;
+        display: block;
+        aspect-ratio: 1;
+        object-fit: cover;
+    }
+    .bridge-photo.bp-1 { top: 10%; left: 5%; transform: rotate(-6deg); }
+    .bridge-photo.bp-2 { bottom: 8%; right: 5%; transform: rotate(4deg); }
 
     /* ===== WHAT'S INSIDE — STICKER BADGE CARDS ===== */
     .whats-inside {
@@ -614,6 +869,29 @@
         padding: 80px 24px 100px;
         text-align: center;
         position: relative;
+        overflow: hidden;
+    }
+    .whats-inside::before {
+        content: '\2726  \2727  \2726  \2727';
+        position: absolute;
+        top: 25px; left: 40px;
+        font-size: 1.5rem;
+        color: rgba(229,58,138,0.1);
+        letter-spacing: 16px;
+        z-index: 0;
+        pointer-events: none;
+        transform: rotate(-8deg);
+    }
+    .whats-inside::after {
+        content: '\2726  \2727  \2726';
+        position: absolute;
+        bottom: 40px; right: 50px;
+        font-size: 1.3rem;
+        color: rgba(180,159,204,0.12);
+        letter-spacing: 14px;
+        z-index: 0;
+        pointer-events: none;
+        transform: rotate(12deg);
     }
     .whats-inside .inner { max-width: 900px; margin: 0 auto; position: relative; z-index: 1; }
     .whats-inside .section-tag {
@@ -799,6 +1077,15 @@
         .whats-inside .section-tag { font-size: 1.4rem; }
         .whats-inside h2 { font-size: 1.8rem; margin-bottom: 30px; }
         .feature-grid { grid-template-columns: 1fr; gap: 16px; }
+
+        /* Hide absolute photos on mobile - they overlap text */
+        .rh-photo { display: none; }
+        .bridge-photo { display: none; }
+        .deco-dots { display: none; }
+        .sf-photo-break .sf-polaroid { max-width: 220px; }
+        .cta-bridge { padding: 60px 20px; }
+        .cta-bridge .bridge-bold { font-size: 2.2rem; }
+        .cta-bridge .bridge-hand { font-size: 1.8rem; }
     }
 </style>
 </head>
@@ -806,17 +1093,17 @@
 
     <!-- ===== VIDEO HERO — PRESERVED EXACTLY ===== -->
     <div class="video-hero" id="videoHero">
-        <video id="bgVideo" src="video1.mp4" muted="" loop="" playsinline="" preload="auto" webkit-playsinline="true" class="visible"></video>
+        <video id="bgVideo" src="video1.mp4" muted="" loop="" playsinline="" preload="auto" webkit-playsinline="true"></video>
         <div class="overlay-dim"></div>
         <div class="overlay-scanlines"></div>
 
-        <div class="hero-logo visible" id="heroLogo">
+        <div class="hero-logo" id="heroLogo">
             <h1>BUILD HER<br>BUSINESS</h1>
             <div><span class="tagline">Find Your Gameplan.</span></div>
         </div>
 
         <!-- PLAY ME — full screen text takeover -->
-        <div class="play-me-screen hidden" id="playMeScreen">
+        <div class="play-me-screen" id="playMeScreen">
             <div class="vf-corner vf-tl"></div>
             <div class="vf-corner vf-tr"></div>
             <div class="vf-corner vf-bl"></div>
@@ -848,7 +1135,7 @@
         </div>
 
         <!-- STATIC COPY HERO — movie poster -->
-        <div class="copy-hero visible" id="copyHero">
+        <div class="copy-hero" id="copyHero">
             <div class="copy-hero-inner">
                 <span class="poster-headline">YOU WERE<br>NEVER THE<br><span class="hl-word">FAILURE.</span></span>
                 <span class="poster-sub">real gameplans. real numbers. £15/month.</span>
@@ -856,7 +1143,7 @@
         </div>
 
         <!-- CTA — appears at the end of the journey -->
-        <div class="hero-cta-final visible" id="ctaFinal">
+        <div class="hero-cta-final" id="ctaFinal">
             <a href="#" class="cta-btn">Find Your Gameplan</a>
             <div class="cta-detail">£15/month. cancel anytime. no bullshit.</div>
             <div class="audio-toggle" id="audioToggle" onclick="event.stopPropagation(); toggleAudio();">
@@ -865,7 +1152,7 @@
             </div>
         </div>
 
-        <div class="scroll-hint visible" id="scrollHint">
+        <div class="scroll-hint" id="scrollHint">
             <span class="scroll-text">KEEP<br>GOING</span>
             <span class="scroll-arrow">▼</span>
         </div>
@@ -874,11 +1161,23 @@
             <source src="audio.mp3" type="audio/mpeg">
         </audio>
 
-        <div class="hero-timestamp visible" id="timestamp">1993</div>
+        <div class="hero-timestamp" id="timestamp">1993</div>
     </div>
 
     <!-- ===== REMEMBER HER — REDESIGNED WITH WARM GRADIENT & LARGE PHOTOS ===== -->
     <section class="remember-her" id="rememberHer">
+        <!-- Scattered decorative dots -->
+        <div class="deco-dots" style="top: 12%; left: 8%;"></div>
+        <div class="deco-dots deco-dots-sm" style="top: 55%; right: 15%; left: auto;"></div>
+        <div class="deco-dots" style="bottom: 15%; left: 12%;"></div>
+
+        <!-- Dotted curvy path SVG — like the PDF road trip doodle -->
+        <div class="dotted-path" style="top: 8%; left: 50%; transform: translateX(-50%);">
+            <svg width="300" height="800" viewBox="0 0 300 800" fill="none">
+                <path d="M150 0 Q250 100 100 200 Q-20 300 200 400 Q320 500 80 600 Q-30 700 150 800" stroke="rgba(229,58,138,0.08)" stroke-width="3" stroke-dasharray="8 12" fill="none"/>
+            </svg>
+        </div>
+
         <!-- Scrapbook photos - much larger with thick white borders -->
         <div class="rh-photo rh-p1">
             <div class="rh-polaroid-scatter">
@@ -931,22 +1230,38 @@
             <div class="section-tag">sound familiar?</div>
             <h2>You've been telling yourself this stuff for years...</h2>
 
-            <div class="diary-note">
+            <!-- Scattered decorative dots -->
+            <div class="deco-dots deco-dots-sm" style="position: absolute; top: 60px; right: -20px;"></div>
+
+            <div class="diary-note" style="position: relative;">
+                <div class="washi-tape"></div>
                 <div class="dn-thought">"I'll start my own thing... one day."</div>
                 <div class="dn-real">You've been saying that since 2019. Not because you're lazy — because no one ever showed you <strong>how</strong>.</div>
             </div>
 
-            <div class="diary-note">
+            <div class="diary-note" style="position: relative;">
+                <div class="washi-tape tape-pink"></div>
                 <div class="dn-thought">"I just need to find the right idea..."</div>
                 <div class="dn-real">The ideas aren't the problem. You've had loads. What you need is the <strong>gameplan</strong> — the steps, the numbers, the "do this first" bit.</div>
             </div>
 
-            <div class="diary-note">
+            <!-- Photo break between diary cards -->
+            <div class="sf-photo-break">
+                <div class="sf-polaroid">
+                    <img src="BHB-Gameplans-NirvanaTee.jpg" alt="">
+                    <span class="pol-label">been there x</span>
+                    <div class="sf-arrow">you're not alone in this</div>
+                </div>
+            </div>
+
+            <div class="diary-note" style="position: relative;">
+                <div class="washi-tape tape-laven"></div>
                 <div class="dn-thought">"It's too late for me now..."</div>
                 <div class="dn-real">Babe, people start businesses at 40, 50, 60. The only deadline is the one you're putting on yourself. <strong>It's not too late.</strong></div>
             </div>
 
-            <div class="diary-note">
+            <div class="diary-note" style="position: relative;">
+                <div class="washi-tape tape-mint"></div>
                 <div class="dn-thought">"I wouldn't even know where to begin..."</div>
                 <div class="dn-real">That's literally why this exists. Step one. Step two. Real numbers. <strong>No guessing.</strong></div>
             </div>
@@ -960,11 +1275,15 @@
         <div class="inner">
             <div class="section-tag">What You Actually Get</div>
             <h2>Everything they should've given you from the start.</h2>
+            <!-- More scattered dots -->
+            <div class="deco-dots" style="position: absolute; top: 100px; right: 30px;"></div>
+            <div class="deco-dots deco-dots-sm" style="position: absolute; bottom: 120px; left: 20px;"></div>
+
             <div class="feature-grid">
-                <div class="feature-card"><div class="icon">the gameplans</div><h3>Step-by-step gameplans</h3><p>Real business plans with real numbers. Not "manifest your dream life" nonsense.</p></div>
-                <div class="feature-card"><div class="icon">the numbers</div><h3>Honest money talk</h3><p>What things actually cost, what you can actually earn, and how long it actually takes.</p></div>
-                <div class="feature-card"><div class="icon">your crew</div><h3>Your crew</h3><p>A community of women who've been where you are. No fake positivity. Just real support.</p></div>
-                <div class="feature-card"><div class="icon">the roadmap</div><h3>The roadmap</h3><p>Month by month, what to do, when to do it, and why. No guessing.</p></div>
+                <div class="feature-card" style="position: relative;"><div class="washi-tape"></div><div class="icon">the gameplans</div><h3>Step-by-step gameplans</h3><p>Real business plans with real numbers. Not "manifest your dream life" nonsense.</p></div>
+                <div class="feature-card" style="position: relative;"><div class="washi-tape tape-pink"></div><div class="icon">the numbers</div><h3>Honest money talk</h3><p>What things actually cost, what you can actually earn, and how long it actually takes.</p></div>
+                <div class="feature-card" style="position: relative;"><div class="washi-tape tape-laven"></div><div class="icon">your crew</div><h3>Your crew</h3><p>A community of women who've been where you are. No fake positivity. Just real support.</p></div>
+                <div class="feature-card" style="position: relative;"><div class="washi-tape tape-mint"></div><div class="icon">the roadmap</div><h3>The roadmap</h3><p>Month by month, what to do, when to do it, and why. No guessing.</p></div>
                 <div class="feature-note"><p>basically everything I wish someone had given me when I was stuck, going round in circles, wondering if it was ever going to be my turn.</p></div>
             </div>
         </div>
@@ -975,6 +1294,31 @@
         <img src="BHB-Roadmap-GoldenHour.jpg" alt="Golden hour" class="divider-photo">
         <div class="divider-caption">your turn is coming.</div>
     </div>
+
+    <!-- ===== CTA BRIDGE — Warm scrapbook call to action ===== -->
+    <section class="cta-bridge">
+        <div class="bridge-photo bp-1">
+            <div class="bridge-pol">
+                <img src="BHB-TheLounge-CosyNightIn.jpg" alt="">
+            </div>
+        </div>
+        <div class="bridge-photo bp-2">
+            <div class="bridge-pol">
+                <img src="BHB-Gameplans-NirvanaTee.jpg" alt="">
+            </div>
+        </div>
+
+        <!-- Decorative dots -->
+        <div class="deco-dots" style="top: 20%; right: 20%;"></div>
+        <div class="deco-dots deco-dots-sm" style="bottom: 25%; left: 15%;"></div>
+
+        <div class="bridge-inner">
+            <div class="bridge-hand">you've waited long enough.</div>
+            <div class="bridge-bold">This is your sign to start.</div>
+            <a href="#" class="bridge-btn">Find Your Gameplan</a>
+            <div class="bridge-sub">£15/month. cancel anytime. no bullshit.</div>
+        </div>
+    </section>
 
     <!-- ===== CRESCENDO FINALE — Dark cinematic section (KEEP AS-IS) ===== -->
     <section class="crescendo" id="crescendo">
