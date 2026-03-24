@@ -40,14 +40,7 @@
         background: #0a0a0f;
     }
     .hero-bg-img {
-        position: absolute;
-        top: 0; left: 0; right: 0; bottom: 0;
-        background-image: url('BHB-LivingRoom-Hero.jpg');
-        background-size: cover;
-        background-position: center;
-        opacity: 0.37;
-        filter: saturate(0.87) brightness(0.85);
-        z-index: 3;
+        display: none;
     }
     .hero-bg-vignette {
         position: absolute;
@@ -62,10 +55,11 @@
         width: 100%; height: 100%;
         object-fit: cover;
         object-position: 55% center;
-        opacity: 0;
-        transition: opacity 1.5s ease;
+        opacity: 0.37;
+        filter: saturate(0.87) brightness(0.85);
+        transition: opacity 1.5s ease, filter 1.5s ease;
     }
-    .video-hero video.visible { opacity: 1; }
+    .video-hero video.visible { opacity: 1; filter: none; }
     .video-hero .overlay-dim {
         position: absolute; top: 0; left: 0; right: 0; bottom: 0;
         background: rgba(0,0,0,0.32);
@@ -1448,8 +1442,7 @@
             }, 100);
         });
 
-        // Play video — also add visible after a short delay as fallback
-        // in case the promise takes a while to resolve on slow connections
+        // Play video at full opacity
         video.play().then(function() {
             video.playbackRate = 0.5;
             video.classList.add('visible');
@@ -1462,12 +1455,6 @@
             try { video.playbackRate = 0.5; } catch(e) {}
         }, 500));
 
-        // Fade out living room background and play me screen
-        var heroBgImg = document.getElementById('heroBgImg');
-        if (heroBgImg) {
-            heroBgImg.style.transition = 'opacity 1.5s ease';
-            heroBgImg.style.opacity = '0';
-        }
         playMeScreen.classList.add('hidden');
 
         // Show stop button
@@ -1574,23 +1561,15 @@
     var textJourney = document.getElementById('textJourney');
 
     function settleToStill() {
-        // Fade out video so it doesn't double up with the living room
+        // Fade video back to soft background level (same as opening)
+        video.classList.remove('visible');
         video.pause();
-        video.style.transition = 'opacity 1.5s ease';
-        video.style.opacity = '0';
 
         // Hide the cycling phrases
         phrases.forEach(function(p) {
             p.classList.remove('visible');
             p.classList.add('fading');
         });
-
-        // Bring the living room back — soft fade in behind the poster
-        var heroBgImg = document.getElementById('heroBgImg');
-        if (heroBgImg) {
-            heroBgImg.style.transition = 'opacity 2s ease';
-            heroBgImg.style.opacity = '0.37';
-        }
 
         // After phrases fade, hide the journey container and show static copy
         setTimeout(function() {
@@ -1668,12 +1647,6 @@ function replayExperience() {
     timestamp.classList.remove('visible');
     heroLogo.classList.remove('visible');
 
-    // Fade out living room
-    if (heroBgImg) {
-        heroBgImg.style.transition = 'opacity 0.5s ease';
-        heroBgImg.style.opacity = '0';
-    }
-
     // Reset text journey phrases
     phrases.forEach(function(p) {
         p.classList.remove('visible');
@@ -1681,10 +1654,10 @@ function replayExperience() {
     });
     textJourney.style.opacity = '0';
 
-    // Reset video
+    // Reset video to soft background state
+    video.classList.remove('visible');
+    video.removeAttribute('style');
     video.currentTime = 0;
-    video.style.transition = 'opacity 0.5s ease';
-    video.style.opacity = '0';
 
     // Brief pause, then restart the experience
     setTimeout(function() {
@@ -1702,15 +1675,15 @@ function replayExperience() {
             if (pauseLabel) pauseLabel.style.display = 'inline';
         }).catch(function() {});
 
-        // Play video
+        // Play video at full opacity
         video.play().then(function() {
             video.playbackRate = 0.5;
-            video.style.transition = 'opacity 1.5s ease';
-            video.style.opacity = '1';
-        }).catch(function() {});
+            video.classList.add('visible');
+        }).catch(function() {
+            video.classList.add('visible');
+        });
         setTimeout(function() {
-            video.style.transition = 'opacity 1.5s ease';
-            video.style.opacity = '1';
+            video.classList.add('visible');
             try { video.playbackRate = 0.5; } catch(e) {}
         }, 500);
 
@@ -1738,18 +1711,13 @@ function replayExperience() {
         var ctaTime = parseInt(lastPhrase.getAttribute('data-out')) + 1000;
 
         setTimeout(function() {
-            // Settle to still
+            // Settle to still — fade video back to soft background
+            video.classList.remove('visible');
             video.pause();
-            video.style.transition = 'opacity 1.5s ease';
-            video.style.opacity = '0';
             phrases.forEach(function(p) {
                 p.classList.remove('visible');
                 p.classList.add('fading');
             });
-            if (heroBgImg) {
-                heroBgImg.style.transition = 'opacity 2s ease';
-                heroBgImg.style.opacity = '0.37';
-            }
             setTimeout(function() {
                 textJourney.style.opacity = '0';
                 copyHero.classList.add('visible');
