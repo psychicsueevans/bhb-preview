@@ -625,8 +625,10 @@
         transform: translateX(-50%) rotate(-3deg);
         width: 80px; height: 18px;
         background: var(--mon-yellow);
-        opacity: 0.6;
+        opacity: 0.7;
         z-index: 3;
+        box-shadow: 1px 2px 4px rgba(0,0,0,0.1);
+        border-radius: 1px;
     }
     .washi-tape.tape-pink { background: var(--mon-pink); transform: translateX(-50%) rotate(2deg); }
     .washi-tape.tape-laven { background: var(--mon-laven); transform: translateX(-50%) rotate(-1deg); }
@@ -662,7 +664,8 @@
     }
     .photo-divider-1 .divider-caption {
         font-family: var(--font-hand);
-        font-size: 1.8rem;
+        font-size: 2.1rem;
+        font-weight: 700;
         color: var(--text-ink);
         font-style: italic;
     }
@@ -740,7 +743,8 @@
     .diary-note:nth-child(5)::before { background: var(--mon-laven); }
     .diary-note .dn-thought {
         font-family: var(--font-hand);
-        font-size: 1.9rem;
+        font-size: 2.3rem;
+        font-weight: 700;
         color: var(--text-ink);
         line-height: 1.25;
         margin-bottom: 12px;
@@ -756,7 +760,7 @@
         font-weight: 600;
     }
     .annotation {
-        font-family: var(--font-hand); font-size: 1.8rem; color: var(--hot-pink);
+        font-family: var(--font-hand); font-size: 2.1rem; font-weight: 700; color: var(--hot-pink);
         margin-top: 30px;
         transform: rotate(-2deg); display: inline-block;
     }
@@ -828,7 +832,8 @@
     }
     .cta-bridge .bridge-hand {
         font-family: var(--font-hand);
-        font-size: 2.4rem;
+        font-size: 2.8rem;
+        font-weight: 700;
         color: var(--text-ink);
         line-height: 1.4;
         margin-bottom: 16px;
@@ -860,9 +865,10 @@
     }
     .cta-bridge .bridge-sub {
         font-family: var(--font-hand);
-        font-size: 1.3rem;
+        font-size: 1.5rem;
+        font-weight: 600;
         color: var(--text-ink);
-        opacity: 0.5;
+        opacity: 0.6;
         margin-top: 14px;
     }
     /* Scattered photo accents in CTA bridge */
@@ -953,7 +959,39 @@
         box-shadow: 0 8px 24px rgba(232,180,248,0.25);
         border-radius: 20px;
     }
-    .feature-note p { font-family: var(--font-hand); font-size: 1.4rem; color: var(--hl-lilac-dark); line-height: 1.4; }
+    .feature-note p { font-family: var(--font-hand); font-size: 1.6rem; font-weight: 700; color: var(--hl-lilac-dark); line-height: 1.4; }
+
+    .gameplan-peek {
+        margin-top: 40px;
+        text-align: center;
+    }
+    .peek-label {
+        font-family: var(--font-hand);
+        font-size: 1.6rem;
+        font-weight: 700;
+        color: var(--text-ink);
+        margin-bottom: 16px;
+    }
+    .peek-stickers {
+        display: flex;
+        justify-content: center;
+        gap: 14px;
+        flex-wrap: wrap;
+    }
+    .peek-sticker {
+        display: inline-block;
+        background: white;
+        border: 2px dashed var(--hot-pink);
+        color: var(--hot-pink);
+        font-family: var(--font-marker);
+        font-size: 1rem;
+        padding: 10px 20px;
+        border-radius: 30px;
+        transform: rotate(-1deg);
+        box-shadow: 2px 3px 8px rgba(0,0,0,0.08);
+    }
+    .peek-sticker:nth-child(2) { transform: rotate(1.5deg); }
+    .peek-sticker:nth-child(3) { transform: rotate(-0.5deg); }
 
     /* ===== PHOTO DIVIDER 2 — Second large photo banner ===== */
     .photo-divider-2 {
@@ -1042,6 +1080,17 @@
         margin-bottom: 8px;
         font-family: 'Courier New', monospace;
     }
+    .cres-scribble {
+        display: block;
+        font-family: var(--font-hand);
+        font-size: 1.4rem;
+        font-weight: 700;
+        color: var(--hl-lilac);
+        letter-spacing: 0;
+        text-transform: none;
+        margin-top: 6px;
+        transform: rotate(-2deg);
+    }
     .crescendo .cres-text.cres-big {
         font-family: 'Anton', sans-serif;
         font-size: 6rem;
@@ -1076,8 +1125,9 @@
     }
     .crescendo .cres-cta .cres-price {
         font-family: var(--font-hand);
-        font-size: 1.4rem;
-        color: rgba(255,255,255,0.5);
+        font-size: 1.6rem;
+        font-weight: 600;
+        color: rgba(255,255,255,0.6);
         margin-top: 14px;
         display: block;
     }
@@ -1314,6 +1364,15 @@
                 <div class="feature-card" style="position: relative;"><div class="washi-tape tape-mint"></div><div class="icon">the roadmap</div><h3>The roadmap</h3><p>Month by month, what to do, when to do it, and why. No guessing.</p></div>
                 <div class="feature-note"><p>basically everything I wish someone had given me when I was stuck, going round in circles, wondering if it was ever going to be my turn.</p></div>
             </div>
+
+            <div class="gameplan-peek">
+                <div class="peek-label">sneak peek at the gameplans:</div>
+                <div class="peek-stickers">
+                    <span class="peek-sticker">Service-Based</span>
+                    <span class="peek-sticker">Product / Maker</span>
+                    <span class="peek-sticker">Digital Freelance</span>
+                </div>
+            </div>
         </div>
     </section>
 
@@ -1377,9 +1436,10 @@
             </div>
         </div>
         <div class="cres-line">
-            <div class="cres-text cres-feature tb-visible">
+            <div class="cres-text cres-feature tb-visible" style="position: relative;">
                 <span class="cres-num">-- 05 --</span>
                 no catch
+                <span class="cres-scribble">seriously. i hate that shit too.</span>
             </div>
         </div>
         <div class="cres-line">
@@ -1531,6 +1591,15 @@
         e.stopPropagation();
         stopExperience();
     }, { passive: false });
+
+    // Early scroll trigger: if user scrolls a bit before pressing play, auto-start
+    var earlyScrollTriggered = false;
+    window.addEventListener('scroll', function() {
+        if (!hasStarted && !earlyScrollTriggered && window.scrollY > 80) {
+            earlyScrollTriggered = true;
+            startExperience();
+        }
+    }, { passive: true });
 
     // Scroll-based auto-fade: smooth fade out when scrolling past hero
     var heroSection = document.getElementById('videoHero');
