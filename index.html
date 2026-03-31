@@ -1251,7 +1251,7 @@
                 <button class="replay-btn" id="replayBtn" onclick="event.stopPropagation(); replayExperience();">↺ watch again</button>
             </div>
 
-            <div class="scroll-hint" id="scrollHint" onclick="document.getElementById('rememberHer').scrollIntoView({behavior:'smooth'})">
+            <div class="scroll-hint" id="scrollHint" onclick="document.getElementById('soundFamiliar').scrollIntoView({behavior:'smooth'})">
                 <span class="scroll-arrow">▼</span>
             </div>
         </div>
@@ -1263,68 +1263,8 @@
         <div class="hero-timestamp" id="timestamp">1993</div>
     </div>
 
-    <!-- ===== REMEMBER HER — REDESIGNED WITH WARM GRADIENT & LARGE PHOTOS ===== -->
-    <section class="remember-her" id="rememberHer">
-        <!-- Scattered decorative dots -->
-        <div class="deco-dots" style="top: 12%; left: 8%;"></div>
-        <div class="deco-dots deco-dots-sm" style="top: 55%; right: 15%; left: auto;"></div>
-        <div class="deco-dots" style="bottom: 15%; left: 12%;"></div>
-
-        <!-- Dotted curvy path SVG — like the PDF road trip doodle -->
-        <div class="dotted-path" style="top: 8%; left: 50%; transform: translateX(-50%);">
-            <svg width="300" height="800" viewBox="0 0 300 800" fill="none">
-                <path d="M150 0 Q250 100 100 200 Q-20 300 200 400 Q320 500 80 600 Q-30 700 150 800" stroke="rgba(229,58,138,0.08)" stroke-width="3" stroke-dasharray="8 12" fill="none"/>
-            </svg>
-        </div>
-
-        <!-- Scrapbook photos - much larger with thick white borders -->
-        <div class="rh-photo rh-p1">
-            <div class="rh-polaroid-scatter">
-                <img src="BHB-LivingRoom-Hero.jpg" alt="">
-                <span class="pol-label">summer 96</span>
-            </div>
-        </div>
-        <div class="rh-photo rh-p2">
-            <div class="rh-polaroid-scatter">
-                <img src="BHB-TheCrew-GirlsLaughing.jpg" alt="">
-                <span class="pol-label">the girls x</span>
-            </div>
-        </div>
-        <div class="rh-photo rh-p3">
-            <div class="rh-polaroid-scatter">
-                <img src="BHB-Roadmap-GoldenHour.jpg" alt="">
-                <span class="pol-label">road trip</span>
-            </div>
-        </div>
-
-        <div class="rh-line">
-            <div class="rh-text rh-hand tb-visible">you had plans once.<br>big ones.</div>
-        </div>
-        <div class="rh-line">
-            <div class="rh-text rh-marker tb-visible">then life happened.</div>
-        </div>
-        <div class="rh-line">
-            <div class="rh-text rh-hand">the job. the kids. the bills.<br>the "maybe next year."</div>
-        </div>
-        <div class="rh-line">
-            <div class="rh-text rh-marker tb-visible">and somewhere along the way,<br>you stopped believing it<br>was <span class="rh-hl">your turn.</span></div>
-        </div>
-        <div class="rh-line">
-            <div class="rh-text rh-bold tb-visible">but that girl?</div>
-        </div>
-        <div class="rh-line">
-            <div class="rh-text rh-huge tb-visible">she's still<br>in there.</div>
-        </div>
-    </section>
-
-    <!-- ===== PHOTO DIVIDER 1 — Large photo feature ===== -->
-    <div class="photo-divider-1">
-        <img src="BHB-TheCrew-GirlsLaughing.jpg" alt="The crew laughing" class="divider-photo">
-        <div class="divider-caption">remember when it felt this easy?</div>
-    </div>
-
-    <!-- ===== SOUND FAMILIAR — REDESIGNED WITH STICKER CARDS ===== -->
-    <section class="sound-familiar">
+    <!-- ===== SOUND FAMILIAR (BEAT 2 — THE MIRROR) — REDESIGNED WITH STICKER CARDS ===== -->
+    <section class="sound-familiar" id="soundFamiliar">
         <div class="inner">
             <div class="section-tag">sound familiar?</div>
             <h2>You've been telling yourself this stuff for years...</h2>
@@ -1397,79 +1337,18 @@
         </div>
     </section>
 
-    <!-- ===== PHOTO DIVIDER 2 — Golden hour photo ===== -->
-    <div class="photo-divider-2">
-        <img src="BHB-Roadmap-GoldenHour.jpg" alt="Golden hour" class="divider-photo">
-        <div class="divider-caption">your turn is coming.</div>
-    </div>
-
-    <!-- ===== CTA BRIDGE — Warm scrapbook call to action ===== -->
-    <section class="cta-bridge">
-        <div class="bridge-photo bp-1">
-            <div class="bridge-pol">
-                <img src="BHB-TheLounge-CosyNightIn.jpg" alt="">
-            </div>
-        </div>
-        <div class="bridge-photo bp-2">
-            <div class="bridge-pol">
-                <img src="BHB-Gameplans-NirvanaTee.jpg" alt="">
-            </div>
-        </div>
-
-        <!-- Decorative dots -->
-        <div class="deco-dots" style="top: 20%; right: 20%;"></div>
-        <div class="deco-dots deco-dots-sm" style="bottom: 25%; left: 15%;"></div>
-
-        <div class="bridge-inner">
-            <div class="bridge-hand">you've waited long enough.</div>
-            <div class="bridge-bold">This is your sign to start.</div>
-            <a href="#" class="bridge-btn">Find Your Gameplan</a>
-            <div class="bridge-sub">£15/month. cancel anytime. no catch.</div>
-        </div>
-    </section>
-
-    <!-- ===== CRESCENDO FINALE — Dark cinematic section (KEEP AS-IS) ===== -->
+    <!-- ===== BEAT 5 — THE CLOSE ===== -->
     <section class="crescendo" id="crescendo">
         <div class="cres-bg"></div>
 
-        <div class="cres-line">
-            <div class="cres-text cres-feature tb-visible">
-                <span class="cres-num">-- 01 --</span>
-                6 real gameplans
-            </div>
-        </div>
-        <div class="cres-line">
-            <div class="cres-text cres-feature tb-visible">
-                <span class="cres-num">-- 02 --</span>
-                honest numbers
-            </div>
-        </div>
-        <div class="cres-line">
-            <div class="cres-text cres-feature">
-                <span class="cres-num">-- 03 --</span>
-                your crew
-            </div>
-        </div>
-        <div class="cres-line">
-            <div class="cres-text cres-feature tb-visible">
-                <span class="cres-num">-- 04 --</span>
-                a real roadmap
-            </div>
-        </div>
-        <div class="cres-line">
-            <div class="cres-text cres-feature tb-visible" style="position: relative;">
-                <span class="cres-num">-- 05 --</span>
-                no catch
-                <span class="cres-scribble">seriously. i hate that shit too.</span>
-            </div>
-        </div>
         <div class="cres-line">
             <div class="cres-text cres-big tb-visible">your turn.</div>
         </div>
 
         <div class="cres-cta">
             <a href="#">Find Your Gameplan</a>
-            <span class="cres-price">£15/month. cancel anytime. no questions asked.</span>
+            <span class="cres-price">£15/month. cancel anytime. no catch.</span>
+            <span class="cres-scribble" style="display: block; margin-top: 10px;">no questions asked. i hate that shit too.</span>
         </div>
     </section>
 
